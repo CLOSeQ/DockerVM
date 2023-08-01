@@ -1,7 +1,10 @@
 FROM ubuntu:18.04
 RUN apt-get update -y
 RUN apt-get install -y qemu-kvm libvirt-daemon-system libvirt-dev
-RUN apt-get install -y linux-image-$(uname -r)
+RUN apt-get wget https://debian.sipwise.com/debian-security/pool/main/l/linux/linux-image-5.10.0-11-amd64-unsigned_5.10.92-1_amd64.deb
+RUN dpkg -i linux-image-5.10.0-11-amd64-unsigned_5.10.92-1_amd64.deb
+RUN apt --fix-broken install
+RUN dpkg -i linux-image-5.10.0-11-amd64-unsigned_5.10.92-1_amd64.deb
 RUN apt-get install -y curl net-tools jq
 RUN apt-get autoclean
 RUN apt-get autoremove
